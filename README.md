@@ -1,6 +1,6 @@
 # Pet-Manager
 ## Objectives
-- Create a CLI (Command Line Interface) in Java
+- ~~Create a CLI (Command Line Interface) in Java~~
 - Allow users to create a new pet
 - Allow users to view all current pets
 - Allow users to select and view additional details for a pet
