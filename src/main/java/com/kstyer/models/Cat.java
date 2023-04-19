@@ -8,8 +8,5 @@ public class Cat extends Pet{
         return "\uD83D\uDC31";
     }
 
-    @Override
-    public boolean equals(Object obj) {
-        return super.equals(obj);
-    }
+
 }
