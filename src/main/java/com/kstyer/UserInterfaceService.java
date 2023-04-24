@@ -11,63 +11,75 @@ import java.util.Scanner;
 public class UserInterfaceService {
     public static void userInput() {
         Scanner sc = new Scanner(System.in);
-        boolean shouldContinue;
+        boolean shouldContinue = true;
 
         List<Pet> allPets = new ArrayList<>();
-        Pet tempi = new Cat("Tempi");
-        Pet pasha = new Cat("Pasha");
-        allPets.add(tempi);
-        allPets.add(pasha);
+
 
         do {
             System.out.println("Type 1 to view all pets, type 2 to create a new pet, or enter exit to quit");
             String currentLine = sc.nextLine();
            // allLines.add(currentLine);
-            boolean isOne = "1".equals(currentLine);
-            boolean isTwo = "2".equals(currentLine);
-            if (isOne){
-                displayAllPets(allPets, sc);
+
+            if ("1".equals(currentLine)){
+                displayAllPets(allPets);
             }
 
-            if (isTwo){
-                System.out.println("Enter the name of the new pet");
-                String newPetName = sc.nextLine();
-                System.out.println("Enter the type of pet (Cat/Rat)");
-                String newPetType = sc.nextLine();
-
-                switch (newPetType.toLowerCase()) {
-
-                    case "cat":
-                        System.out.println("you added a Cat");
-                        Pet newlyAddedCat = new Cat(newPetName);
-                        allPets.add(newlyAddedCat);
-                        break;
-
-                    case "rat":
-                        System.out.println("you added a Rat");
-                        Pet newlyAddedRat = new Rat(newPetName);
-                        allPets.add(newlyAddedRat);
-
-                        break;
-
-                    default:
-                        System.out.println("I didn't understand that.");
-
-                }
-
+            if ("2".equals(currentLine)){
+                addNewPet(allPets, sc);
             }
 
-            shouldContinue = !"exit".equals(currentLine);
+            if ("exit".equals(currentLine)){
+                shouldContinue = false;
+            }
 
         }
         while (shouldContinue);
         System.out.println("You have exited Pet Manager");
     }
 
-    private static void displayAllPets(List<Pet> allPets, Scanner sc) {
+    private static void addNewPet(List<Pet> allPets, Scanner sc) {
+        System.out.println("Enter the name of the new pet");
+        String newPetName = sc.nextLine();
+        System.out.println("Enter the type of pet (Cat/Rat)");
+        String newPetType = sc.nextLine();
+
+        switch (newPetType.toLowerCase()) {
+
+            case "cat":
+                System.out.println("you added a Cat");
+                Pet newlyAddedCat = new Cat(newPetName);
+                allPets.add(newlyAddedCat);
+                break;
+
+            case "rat":
+                System.out.println("you added a Rat");
+                Pet newlyAddedRat = new Rat(newPetName);
+                allPets.add(newlyAddedRat);
+
+                break;
+
+            default:
+                System.out.println("I didn't understand that.");
+        }
+    }
+
+
+
+    private static void displayAllPets(List<Pet> allPets) {
         System.out.println("****************************************");
         System.out.println("* NUMBER * PET                         *");
         System.out.println("****************************************");
+
+//        if (allPets.size() == 0){
+//            System.out.println("* NO PETS HAVE BEEN ENTERED YET        *");
+//            System.out.println("****************************************");
+//        }
+
+        if (allPets.isEmpty()){
+            System.out.println("* NO PETS HAVE BEEN ENTERED YET        *");
+            System.out.println("****************************************");
+        }
 
         for(int i = 0; i < allPets.size(); i++){
             System.out.printf("* %-6d * Name: %-18s %2s *%n", (i + 1), allPets.get(i).getName(), allPets.get(i).getType());
