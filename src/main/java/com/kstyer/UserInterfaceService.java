@@ -2,6 +2,7 @@ package com.kstyer;
 
 import com.kstyer.models.Cat;
 import com.kstyer.models.Pet;
+import com.kstyer.models.PetTypes;
 import com.kstyer.models.Rat;
 
 import java.util.ArrayList;
@@ -21,17 +22,36 @@ public class UserInterfaceService {
             String currentLine = sc.nextLine();
            // allLines.add(currentLine);
 
-            if ("1".equals(currentLine)){
-                displayAllPets(allPets);
+            switch (currentLine.toLowerCase()) {
+
+                case "1":
+                    displayAllPets(allPets);
+                    break;
+
+                case "2":
+                    addNewPet(allPets, sc);
+                    break;
+
+                case "exit":
+                    shouldContinue = false;
+                    break;
+
+                default:
+                    System.out.println("I didn't understand that.");
+
             }
 
-            if ("2".equals(currentLine)){
-                addNewPet(allPets, sc);
-            }
-
-            if ("exit".equals(currentLine)){
-                shouldContinue = false;
-            }
+//            if ("1".equals(currentLine)){
+//                displayAllPets(allPets);
+//            }
+//
+//            if ("2".equals(currentLine)){
+//                addNewPet(allPets, sc);
+//            }
+//
+//            if ("exit".equals(currentLine)){
+//                shouldContinue = false;
+//            }
 
         }
         while (shouldContinue);
@@ -44,8 +64,8 @@ public class UserInterfaceService {
         System.out.println("Enter the type of pet (Cat/Rat)");
         String newPetType = sc.nextLine();
 
-        switch (newPetType.toLowerCase()) {
 
+        switch (newPetType.toLowerCase()) {
             case "cat":
                 System.out.println("you added a Cat");
                 Pet newlyAddedCat = new Cat(newPetName);
@@ -56,12 +76,25 @@ public class UserInterfaceService {
                 System.out.println("you added a Rat");
                 Pet newlyAddedRat = new Rat(newPetName);
                 allPets.add(newlyAddedRat);
-
                 break;
 
             default:
                 System.out.println("I didn't understand that.");
         }
+
+//        switch (PetTypes.valueOf(newPetType.toUpperCase())) {
+//            case CAT -> {
+//                System.out.println("you added a Cat");
+//                Pet newlyAddedCat = new Cat(newPetName);
+//                allPets.add(newlyAddedCat);
+//            }
+//            case RAT -> {
+//                System.out.println("you added a Rat");
+//                Pet newlyAddedRat = new Rat(newPetName);
+//                allPets.add(newlyAddedRat);
+//            }
+//            default -> System.out.println("I didn't understand that.");
+//        }
     }
 
 
