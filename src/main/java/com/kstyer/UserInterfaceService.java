@@ -18,7 +18,7 @@ public class UserInterfaceService {
 
 
         do {
-            System.out.println("Type 1 to view all pets, type 2 to create a new pet, or enter exit to quit");
+            System.out.println("Type 1 to view all pets, type 2 to create a new pet, type 3 to sort all pets, or enter exit to quit");
             String currentLine = sc.nextLine();
            // allLines.add(currentLine);
 
@@ -30,6 +30,10 @@ public class UserInterfaceService {
 
                 case "2":
                     addNewPet(allPets, sc);
+                    break;
+
+                case "3":
+                    allPets = sortAllPets(allPets);
                     break;
 
                 case "exit":
@@ -56,6 +60,29 @@ public class UserInterfaceService {
         }
         while (shouldContinue);
         System.out.println("You have exited Pet Manager");
+    }
+
+    private static List<Pet> sortAllPets(List<Pet> unsortedPets) {
+        List<Pet> sortedPets = new ArrayList<>();
+        if (!unsortedPets.isEmpty()){
+            sortedPets.add(unsortedPets.get(0));
+
+            for(int i = 1; i < unsortedPets.size(); i++) {
+                for(int j = 0; j < sortedPets.size(); j++){
+                    if(unsortedPets.get(i).getName().compareToIgnoreCase(sortedPets.get(j).getName()) < 0) {
+                        sortedPets.add(j, unsortedPets.get(i));
+                        break;
+                    }
+                    if(j == sortedPets.size() -1) {
+                        sortedPets.add(unsortedPets.get(i));
+                        break;
+                    }
+                }
+            }
+        }
+
+        displayAllPets(sortedPets);
+        return sortedPets;
     }
 
     private static void addNewPet(List<Pet> allPets, Scanner sc) {

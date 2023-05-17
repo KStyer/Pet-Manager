@@ -9,3 +9,4 @@
 - Allow users to gracefully exit the program
 - Create at least 2 different subclasses of pet
 - Create at least 3 different properties for each pet
+- Allow users to press 3 to alphbetize the list of pets
